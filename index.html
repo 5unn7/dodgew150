@@ -9,7 +9,7 @@
 <div class="app">
 <header class="topbar">
  <div class="brand"><div class="brandmark">W<span>↗</span></div><div><b>W150 ATLAS</b><small>1989 POWER RAM · DIGITAL TWIN</small></div></div>
- <div class="topcenter"><span class="live-dot"></span> <span>LONG BED · FOUNDATION <em>v0.3</em></span></div>
+ <div class="topcenter"><span class="live-dot"></span> <span>LONG BED · SCULPTED EXTERIOR <em>v0.4</em></span></div>
  <div class="topactions"><button id="snapshot" class="btn subtle" title="Save screenshot">↧ <span>Snapshot</span></button><button id="import" class="btn subtle">Import log ↑</button><input id="import-file" type="file" accept="application/json,.json" hidden><button id="export" class="btn primary">Export build log ↗</button></div>
 </header>
 <div class="workspace">
@@ -36,7 +36,7 @@
  </aside>
  <main class="main">
   <div class="stage">
-   <div class="stage-head"><div><div class="eyebrow">DIGITAL GARAGE <span> / </span> VEHICLE ASSEMBLY</div><h1>1989 Dodge <span>W150</span></h1><p>Owner-reported 8-foot bed · 131-inch reference wheelbase · restomod project</p></div><div class="stage-serial">AD5 / 4×4 <span>BASE REV. 001</span></div></div>
+   <div class="stage-head"><div><div class="eyebrow">DIGITAL GARAGE <span> / </span> VEHICLE ASSEMBLY</div><h1>1989 Dodge <span>W150</span></h1><p>Owner-reported 8-foot bed · 131-inch reference wheelbase · restomod project</p></div><div class="stage-serial">AD5 / 4×4 <span>EXTERIOR REV. 004</span></div></div>
    <div class="viewport" id="viewport">
     <div class="viewport-hud"><span class="chip">● LIVE 3D</span><span id="variant-readout" class="chip subdued">131″ WHEELBASE</span><span class="chip subdued">ILLUSTRATIVE GEOMETRY</span></div>
     <div id="loading" class="loading"><div class="loader"></div><b>ASSEMBLING DIGITAL TWIN</b><span>Preparing interactive truck…</span></div>
@@ -50,7 +50,7 @@
  <aside class="inspector"><div class="inspector-heading"><span id="inspector-kicker">ASSEMBLY EXPLORER</span><span class="outline-tag">REV 0.3</span></div>
   <section class="inspector-section" id="parts-panel"><div class="inspector-topline">COMPONENT INDEX <span id="part-count">— ENTRIES</span></div><input id="search" class="search" type="search" placeholder="Search components…" aria-label="Search components"><div class="parts-list" id="parts-list"></div><div class="part-detail" id="detail"><div class="detail-placeholder">Select a component on the vehicle or in the index to inspect its factory reference and build notes.</div></div></section>
   <section class="inspector-section hidden" id="tasks-panel"><div class="inspector-topline">PROJECT ROADMAP <span>EDITABLE</span></div><div class="progress-block"><div class="progress-top"><span>Checklist progress</span><b id="progress-label">0%</b></div><div class="progress-bar"><div id="progress-fill"></div></div><p>Saved in this browser. Export the build log to back it up.</p></div><div id="task-list" class="tasks-list"></div></section>
-  <section class="inspector-section hidden" id="sources-panel"><div class="inspector-topline">SOURCE OF TRUTH <span>2 ASSETS</span></div><div class="source-block"><div class="source-icon">▤</div><b>Chrysler Motors service manual</b><p><strong>Dodge Truck SM.pdf</strong> — owner-supplied manual. System chapters are indexed in the model.</p><div class="source-line">PDF p. 5 · AD5 W150 identification</div><div class="source-line">PDF p. 8 · Power team configurations</div><div class="source-line">PDF p. 12 · Body dimensions</div></div><div class="source-block"><div class="source-icon">▧</div><b>3D base geometry</b><p>Procedurally authored geometry from body proportions and wheelbase dimensions. No LiDAR, photogrammetry or real vehicle measurements yet.</p></div><div class="source-block caution"><b>Interpretation rule</b><p>Factory possibilities ≠ verified equipment. Confirm applicability using your own truck's equipment plate and installed part numbers.</p></div><div class="manual-groups" id="manual-groups"></div></section>
+  <section class="inspector-section hidden" id="sources-panel"><div class="inspector-topline">SOURCE OF TRUTH <span>2 ASSETS</span></div><div class="source-block"><div class="source-icon">▤</div><b>Chrysler Motors service manual</b><p><strong>Dodge Truck SM.pdf</strong> — owner-supplied manual. System chapters are indexed in the model.</p><div class="source-line">PDF p. 5 · AD5 W150 identification</div><div class="source-line">PDF p. 8 · Power team configurations</div><div class="source-line">PDF p. 12 · Body dimensions</div></div><div class="source-block"><div class="source-icon">▧</div><b>3D base geometry</b><p>Reworked exterior with shaped steel panels, real wheel-arch openings, sculpted hood, window glass, grille and treaded tires. This is a visual reference, not a scan, photogrammetry or factory CAD.</p></div><div class="source-block caution"><b>Interpretation rule</b><p>Factory possibilities ≠ verified equipment. Confirm applicability using your own truck's equipment plate and installed part numbers.</p></div><div class="manual-groups" id="manual-groups"></div></section>
   <div class="inspector-footer"><b>THE RECORD SHOULD MATCH THE TRUCK.</b><span>As-built data takes precedence over concept renders.</span></div>
  </aside>
 </div>
