@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+import {RoomEnvironment} from 'three/addons/environments/RoomEnvironment.js';
 import {sculptBody} from './sculpt.js';
 import {sculptWheels} from './sculpt-wheels.js';
 const $=id=>document.getElementById(id);
@@ -254,7 +255,7 @@ function downloadDataURL(href,name){const a=document.createElement('a');a.href=h
 function init(){
  const stage=$('viewport');scene=new THREE.Scene();scene.background=new THREE.Color(0x18262e);scene.fog=new THREE.Fog(0x18262e,10,25);
  camera=new THREE.PerspectiveCamera(43,1,.1,70);
- renderer=new THREE.WebGLRenderer({antialias:true,preserveDrawingBuffer:true,powerPreference:'default'});renderer.setPixelRatio(Math.min(devicePixelRatio||1,2));renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.5;renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.domElement.setAttribute('aria-label','Interactive 3D model of 1989 Dodge W150 truck');stage.prepend(renderer.domElement);
+ renderer=new THREE.WebGLRenderer({antialias:true,preserveDrawingBuffer:true,powerPreference:'default'});renderer.setPixelRatio(Math.min(devicePixelRatio||1,2));renderer.outputColorSpace=THREE.SRGBColorSpace;const envGen=new THREE.PMREMGenerator(renderer);const environment=new RoomEnvironment();scene.environment=envGen.fromScene(environment,.05).texture;environment.dispose();envGen.dispose();renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.5;renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.domElement.setAttribute('aria-label','Interactive 3D model of 1989 Dodge W150 truck');stage.prepend(renderer.domElement);
  controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true;controls.dampingFactor=.075;controls.minDistance=3.3;controls.maxDistance=16;controls.maxPolarAngle=Math.PI*.55;controls.target.set(0,1,0);
  scene.add(new THREE.HemisphereLight(0xe7efff,0x364451,3));
  const key=new THREE.DirectionalLight(0xffebce,3.3);key.position.set(-4,10,-7);key.castShadow=true;key.shadow.mapSize.set(1024,1024);key.shadow.camera.left=-9;key.shadow.camera.right=9;key.shadow.camera.top=9;key.shadow.camera.bottom=-9;scene.add(key);
