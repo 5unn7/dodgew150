@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="theme-color" content="#11171c"/>
+<title>W150 Atlas | 3D Restoration Manual</title>
+<link rel="stylesheet" href="./style.css"/>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.164.1/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.164.1/examples/jsm/"}}</script>
+</head><body>
+<div class="app">
+<header class="topbar">
+ <div class="brand"><div class="brandmark">W<span>↗</span></div><div><b>W150 ATLAS</b><small>1989 POWER RAM · DIGITAL TWIN</small></div></div>
+ <div class="topcenter"><span class="live-dot"></span> <span>LONG BED · FOUNDATION <em>v0.3</em></span></div>
+ <div class="topactions"><button id="snapshot" class="btn subtle" title="Save screenshot">↧ <span>Snapshot</span></button><button id="import" class="btn subtle">Import log ↑</button><input id="import-file" type="file" accept="application/json,.json" hidden><button id="export" class="btn primary">Export build log ↗</button></div>
+</header>
+<div class="workspace">
+ <aside class="rail">
+  <div class="rail-head"><span>PROJECT MAP</span><small>02 / LONG BED</small></div>
+  <button class="rail-button active" data-tab="parts"><i>◫</i> Components <span id="rail-parts-count">—</span></button>
+  <button class="rail-button" data-tab="tasks"><i>☷</i> Build roadmap <span id="rail-tasks-count">—</span></button>
+  <button class="rail-button" data-tab="sources"><i>▤</i> Manual & sources</button>
+  <div class="rule"></div>
+  <div class="rail-label">VARIANT</div>
+  <select id="variant" aria-label="Vehicle variant"><option value="131" selected>131″ · 8 ft long bed</option><option value="115">115″ · Short bed reference</option></select>
+  <div class="rail-label">LAYER CONTROL</div>
+  <label class="switchline"><input class="layer-toggle" data-category="body" type="checkbox" checked><span>Body panels</span><i class="color body"></i></label>
+  <label class="switchline"><input class="layer-toggle" data-category="chassis" type="checkbox" checked><span>Frame & chassis</span><i class="color chassis"></i></label>
+  <label class="switchline"><input class="layer-toggle" data-category="drivetrain" type="checkbox" checked><span>Powertrain</span><i class="color drivetrain"></i></label>
+  <label class="switchline"><input class="layer-toggle" data-category="suspension" type="checkbox" checked><span>Suspension</span><i class="color suspension"></i></label>
+  <label class="switchline"><input class="layer-toggle" data-category="wheels" type="checkbox" checked><span>Wheels</span><i class="color wheels"></i></label>
+  <label class="switchline"><input class="layer-toggle" data-category="interior" type="checkbox" checked><span>Interior</span><i class="color interior"></i></label>
+  <label class="switchline"><input class="layer-toggle" data-category="lighting" type="checkbox" checked><span>Lighting</span><i class="color lighting"></i></label>
+  <div class="rule"></div>
+  <label class="switchline featured"><input id="planned" type="checkbox"><span>Future modifications</span><i class="color planned"></i></label>
+  <p class="microcopy">Cyan components are design concepts, not confirmed or installed parts.</p>
+  <div class="rail-bottom"><span>GEOMETRY STATUS</span><b>REFERENCE / UNVERIFIED</b><small>Not CAD-grade and not safe for fabrication.</small></div>
+ </aside>
+ <main class="main">
+  <div class="stage">
+   <div class="stage-head"><div><div class="eyebrow">DIGITAL GARAGE <span> / </span> VEHICLE ASSEMBLY</div><h1>1989 Dodge <span>W150</span></h1><p>Owner-reported 8-foot bed · 131-inch reference wheelbase · restomod project</p></div><div class="stage-serial">AD5 / 4×4 <span>BASE REV. 001</span></div></div>
+   <div class="viewport" id="viewport">
+    <div class="viewport-hud"><span class="chip">● LIVE 3D</span><span id="variant-readout" class="chip subdued">131″ WHEELBASE</span><span class="chip subdued">ILLUSTRATIVE GEOMETRY</span></div>
+    <div id="loading" class="loading"><div class="loader"></div><b>ASSEMBLING DIGITAL TWIN</b><span>Preparing interactive truck…</span></div>
+    <div id="model-tooltip" class="model-tooltip" hidden><b id="tooltip-name">Part</b><span id="tooltip-type">click to inspect</span></div>
+    <div class="view-controls"><button data-camera="iso" class="active" title="Three-quarter view">3D</button><button data-camera="front">FRONT</button><button data-camera="side">SIDE</button><button data-camera="top">TOP</button><button id="explode" title="Toggle exploded view">↗ EXPLODE</button><button id="xray" title="Make body transparent">◌ X-RAY</button><button id="reset" title="Reset camera">⌖</button></div>
+    <div class="viewport-credit">DRAG ORBIT <span>·</span> SCROLL ZOOM <span>·</span> CLICK A PART TO INSPECT</div>
+   </div>
+   <div class="stage-bottom"><div class="data-pill"><span class="stat-prefix">01</span><b id="stat-parts">—</b><span>component groups</span></div><div class="data-pill"><span class="stat-prefix">02</span><b>2</b><span>body variants</span></div><div class="data-pill"><span class="stat-prefix">03</span><b id="stat-progress">0/22</b><span>tasks completed</span></div><div class="data-pill"><span class="stat-prefix">04</span><b>1989</b><span>model year</span></div></div>
+  </div>
+ </main>
+ <aside class="inspector"><div class="inspector-heading"><span id="inspector-kicker">ASSEMBLY EXPLORER</span><span class="outline-tag">REV 0.3</span></div>
+  <section class="inspector-section" id="parts-panel"><div class="inspector-topline">COMPONENT INDEX <span id="part-count">— ENTRIES</span></div><input id="search" class="search" type="search" placeholder="Search components…" aria-label="Search components"><div class="parts-list" id="parts-list"></div><div class="part-detail" id="detail"><div class="detail-placeholder">Select a component on the vehicle or in the index to inspect its factory reference and build notes.</div></div></section>
+  <section class="inspector-section hidden" id="tasks-panel"><div class="inspector-topline">PROJECT ROADMAP <span>EDITABLE</span></div><div class="progress-block"><div class="progress-top"><span>Checklist progress</span><b id="progress-label">0%</b></div><div class="progress-bar"><div id="progress-fill"></div></div><p>Saved in this browser. Export the build log to back it up.</p></div><div id="task-list" class="tasks-list"></div></section>
+  <section class="inspector-section hidden" id="sources-panel"><div class="inspector-topline">SOURCE OF TRUTH <span>2 ASSETS</span></div><div class="source-block"><div class="source-icon">▤</div><b>Chrysler Motors service manual</b><p><strong>Dodge Truck SM.pdf</strong> — owner-supplied manual. System chapters are indexed in the model.</p><div class="source-line">PDF p. 5 · AD5 W150 identification</div><div class="source-line">PDF p. 8 · Power team configurations</div><div class="source-line">PDF p. 12 · Body dimensions</div></div><div class="source-block"><div class="source-icon">▧</div><b>3D base geometry</b><p>Procedurally authored geometry from body proportions and wheelbase dimensions. No LiDAR, photogrammetry or real vehicle measurements yet.</p></div><div class="source-block caution"><b>Interpretation rule</b><p>Factory possibilities ≠ verified equipment. Confirm applicability using your own truck's equipment plate and installed part numbers.</p></div><div class="manual-groups" id="manual-groups"></div></section>
+  <div class="inspector-footer"><b>THE RECORD SHOULD MATCH THE TRUCK.</b><span>As-built data takes precedence over concept renders.</span></div>
+ </aside>
+</div>
+<footer class="footer"><span>W150 / DIGITAL GARAGE</span><span id="status-message">Ready to map the truck.</span><span>BROWSER-BASED · SAVE LOG LOCALLY</span></footer>
+</div>
+<script type="module" src="./app.js"></script>
+</body></html>
