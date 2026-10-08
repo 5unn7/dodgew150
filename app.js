@@ -1,5 +1,7 @@
 import * as THREE from 'three';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+import {sculptBody} from './sculpt.js';
+import {sculptWheels} from './sculpt-wheels.js';
 const $=id=>document.getElementById(id);
 const q=sel=>Array.from(document.querySelectorAll(sel));
 const STORAGE='w150-atlas-progress-v3';
@@ -211,9 +213,11 @@ function build(wh){
  box('winch',.55,.27,.21,0,1.04,-2.84,'steel');
  box('lightbar',1.10,.11,.10,0,2.25,-.89,'concept');
  box('digital_dash',.85,.26,.042,0,1.56,-.98,'concept');
+ sculptBody({root,registry:meshRegistry,parts:project.parts,variant:wh});
+ sculptWheels({root,registry:meshRegistry,parts:project.parts,variant:wh});
  updateVis();applyXray();applyExplosion();selectPart(selected,false);
  $('variant-readout').textContent=wh+'″ WHEELBASE';
- status(wh+'″ reference model loaded · '+meshRegistry.length+' objects.');
+ status(wh+'″ shaped reference model loaded · '+meshRegistry.length+' objects.');
  $('loading').hidden=true;
 }
 function status(t){$('status-message').textContent=t}
