@@ -8,9 +8,9 @@ Once GitHub Pages is enabled: **https://5unn7.github.io/dodgew150/**
 
 The interactive site works on phones and desktops using modern browsers with WebGL. With touch controls, drag to orbit, pinch to zoom and tap a component to inspect it.
 
-## Current build: prototype 0.3
+## Current build: shaped-exterior prototype 0.4
 
-- Three.js interactive model generated in the browser (does not require downloading a separate GLB).
+- Three.js browser-generated exterior with hand-shaped fenders, actual curved wheel cutouts, sculpted hood, period grille/headlamp housings, cab windows, long-bed sides and detailed off-road tires. Does not require downloading a separate GLB.
 - 8-foot long bed selected by default; optional short-bed comparison.
 - Individual component selection, isolation by category, X-ray and exploded assembly views.
 - Roadmap and editable notes saved in **your own browser**.
@@ -43,7 +43,13 @@ Your checklist and notes are stored locally on your device/browser. This reposit
 
 - index.html — website structure
 - style.css — responsive viewer and project interface
-- app.js — Three.js model, components, interaction and local work log
+- app.js — Three.js base mechanical envelopes, interaction and local work log
+- sculpt.js — handcrafted exterior body surfaces and chrome/glazing details
+- sculpt-wheels.js — detailed wheel faces and mobile-friendly tread instancing
 - .github/workflows/pages.yml — automatic static publishing
 
 The earlier W150 Atlas v0.2 download package also includes Blender scripts, exported GLB models and preview renders. Those binaries have not yet been migrated into this GitHub repository; the published web prototype currently creates its model procedurally.
+
+## Fidelity limitation
+
+This is not yet a photorealistic, OEM-accurate production asset. Chrome and paint are PBR-lit, and the shaped exterior improves on the original blockout, but accurate panel radii, interior geometry and texture detail still require a dedicated Blender mesh based on many photographs/measurements (or a suitably licensed commercial asset). The next generation should use a named-part GLB as the visible exterior and retain the existing inspection/tracking interface.
