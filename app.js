@@ -258,8 +258,8 @@ function init(){
  const floor=new THREE.Mesh(new THREE.PlaneGeometry(120,120),new THREE.MeshStandardMaterial({color:0x1c2a32,roughness:.9}));floor.rotation.x=-Math.PI/2;floor.position.y=.035;floor.receiveShadow=true;scene.add(floor);
  const grid=new THREE.GridHelper(26,26,0x35505c,0x2a3a45);grid.position.y=.041;scene.add(grid);
  raycaster=new THREE.Raycaster();pointer=new THREE.Vector2();
- renderer.domElement.addEventListener('pointerup',e=>{if(Math.abs(e.movementX)<8&&Math.abs(e.movementY)<8)onClick3D(e)});
- const resize=()=>{const w=stage.clientWidth,h=stage.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix()};new ResizeObserver(resize).observe(stage);resize();
+ let pointerDown=null;renderer.domElement.addEventListener('pointerdown',e=>{pointerDown={x:e.clientX,y:e.clientY,time:Date.now()}});renderer.domElement.addEventListener('pointerup',e=>{if(pointerDown&&Math.hypot(e.clientX-pointerDown.x,e.clientY-pointerDown.y)<9&&Date.now()-pointerDown.time<900)onClick3D(e);pointerDown=null});
+ const resize=()=>{const w=stage.clientWidth,h=stage.clientHeight;renderer.setSize(w,h);camera.aspect=w/h;camera.updateProjectionMatrix()};new ResizeObserver(resize).observe(stage);resize();
  loadProgress();installHandlers();buildPartsList();renderRoadmap();$('manual-groups').innerHTML='<b>GROUP MAP</b>'+project.manual.groups.map(g=>'<div><b>'+g.id+'</b>'+escapeHTML(g.name)+'</div>').join('');$('stat-parts').textContent=project.parts.length;
  build('131');setCamera('iso');
  const render=()=>{animationId=requestAnimationFrame(render);controls.update();renderer.render(scene,camera)};render();
